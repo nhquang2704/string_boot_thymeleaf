@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import java.util.Optional;
-import org.apache.groovy.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,12 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import org.springframework.util.StringUtils;
 import jakarta.validation.Valid;
 import vn.iotstar.entity.CategoryEntity;
+import vn.iotstar.model.CategoryModel;
 import vn.iotstar.service.ICategoryService;
+import org.springframework.beans.BeanUtils;
+
 
 @Controller
 @RequestMapping("admin/categories")
@@ -45,8 +45,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping("saveOrUpdate")
-	public ModelAndView saveOrUpdate (ModelMap model,
-			@Valid @ModelAttribute("category") CategoryModel cateModel, BindingResult result) {
+	public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("category") CategoryModel cateModel, BindingResult result) {
 		if(result.hasErrors()) {
 			return new ModelAndView("admin/categories/addOrEdit");
 		}
@@ -101,7 +100,7 @@ public class CategoryController {
 	}
 	
 	@GetMapping("search")
-	public String search (ModelMap mode1, @RequestParam(name="name", required = false) String name) {
+	public String search (ModelMap model, @RequestParam(name="name", required = false) String name) {
 	List<CategoryEntity> list = null;
 	// có nôi dung truyền v không, name là tùy chon khi required-false 
 	if(StringUtils.hasText(name)) {
