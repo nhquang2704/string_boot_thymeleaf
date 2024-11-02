@@ -3,42 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Layout</title>
-    <link rel="stylesheet" href="path/to/your/styles.css" th:href="@{/css/styles.css}">
-    <!-- Thêm các CSS và JS cần thiết khác -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <header class="row">
-        <div class="col">
-            <!-- Thay thế với header fragment -->
-            <div th:replace="~{admin/fragments/header::header}"></div>
-        </div>
+    <header>
+        <div th:replace="~{admin/fragments/header :: header}"></div>
     </header>
 
-    <main class="container">
-        <!-- Bỏ ghi chú nav nếu không cần thiết -->
-        <nav class="row">
-            <div class="col">
-                <!-- Thay thế với nav fragment -->
-                <div th:replace="~{admin/fragments/nav::nav}"></div>
-            </div>
-        </nav>
-
-        <section class="row mt-4">
-            <div class="col mt-5 mb-5">
-                <!-- Nội dung của trang con sẽ được chèn vào đây -->
-                <div layout:fragment="content"></div>
-            </div>
-        </section>
+    <main layout:fragment="content">
+        <!-- Nội dung sẽ được chèn từ các template khác -->
     </main>
 
-    <footer class="row">
-        <div class="col">
-            <!-- Thay thế với footer fragment -->
-            <div th:replace="~{admin/fragments/footer::footer}"></div>
-        </div>
+    <footer>
+        <div th:replace="~{admin/fragments/footer :: footer}"></div>
     </footer>
 
-    <!-- Chèn các script cần thiết -->
-    <script src="path/to/your/script.js" th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
 </body>
 </html>
